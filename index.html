@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>UAP Alert — VOIDSTATION</title>
+<style>
+:root{--red:#ff2a3a;--amber:#ffb020;--cyan:#3ee0ff}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:"Courier New",ui-monospace,monospace;color:#d8e0e8;touch-action:none}
+#wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#000}
+canvas{image-rendering:pixelated;background:#000;display:block}
+#overlay,#hud,#touch{position:absolute;inset:0;pointer-events:none}
+#overlay{display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.72);pointer-events:auto}
+#overlay.hidden{display:none}
+.panel{max-width:720px;padding:28px 32px;text-align:center}
+h1{font-size:clamp(28px,6vw,64px);letter-spacing:.28em;color:var(--red);text-shadow:0 0 18px #ff2a3a88}
+.sub{margin-top:8px;color:var(--cyan);letter-spacing:.35em;font-size:12px}
+.lore{margin:22px auto 0;max-width:520px;line-height:1.55;color:#9aa8b4;font-size:14px}
+.hint{margin-top:18px;color:#6e7b86;font-size:12px;letter-spacing:.08em}
+button.cta{pointer-events:auto;margin-top:26px;background:transparent;color:#fff;border:1px solid var(--red);padding:12px 28px;letter-spacing:.22em;cursor:pointer;font-family:inherit;font-size:14px}
+#hud{display:none}#hud.on{display:block}
+.bar{position:absolute;left:0;right:0;bottom:0;height:54px;background:linear-gradient(transparent,rgba(0,0,0,.85));display:flex;align-items:flex-end;justify-content:space-between;padding:8px 16px 10px;font-size:13px;letter-spacing:.12em}
+.stat span{color:var(--amber)}.stat.hp span{color:var(--red)}.stat.ammo span{color:var(--cyan)}
+#cross{position:absolute;left:50%;top:48%;width:10px;height:10px;margin:-5px 0 0 -5px;border:1px solid #ffffffaa;border-radius:50%}
+#msg{position:absolute;left:50%;top:18%;transform:translateX(-50%);color:var(--amber);letter-spacing:.16em;font-size:13px;opacity:0}
+#msg.show{opacity:1}
+#touch{display:none}
+@media (pointer:coarse){
+#touch{display:block;pointer-events:none}
+.joy,.firebtn{pointer-events:auto;position:absolute;border:1px solid #ffffff33;background:#ffffff10}
+.joy{left:28px;bottom:28px;width:130px;height:130px;border-radius:50%}
+.knob{position:absolute;width:52px;height:52px;border-radius:50%;background:#ffffff44;left:39px;top:39px}
+.firebtn{right:28px;bottom:40px;width:92px;height:92px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2em;font-size:12px}
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+<canvas id="view" width="640" height="400"></canvas>
+<div id="hud">
+<div id="cross"></div>
+<div id="msg"></div>
+<div class="bar">
+<div class="stat hp">HULL <span id="hp">100</span></div>
+<div class="stat">KILLS <span id="kills">0</span></div>
+<div class="stat">SECTOR <span id="sec">AIRLOCK</span></div>
+<div class="stat ammo">CELL <span id="ammo">24</span></div>
+</div>
+</div>
+<div id="touch">
+<div class="joy" id="joy"><div class="knob" id="knob"></div></div>
+<div class="firebtn" id="firebtn">FIRE</div>
+</div>
+<div id="overlay"><div class="panel" id="panel"></div></div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
