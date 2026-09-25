@@ -1,2 +1,2 @@
-document.write('<script src="https://cdn.jsdelivr.net/gh/zljones1/UAP-Alert@main/game.js"><\/script>');
-console.warn('legacy stub');
+/* UAP Alert engine is in the project download (UAP Alert.html) until the full bundle is pushed. */
+console.error("UAP Alert: open the standalone HTML from the project folder if this build looks old.");
